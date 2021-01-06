@@ -16,6 +16,7 @@ import com.company.app.ws.io.entity.UserRole;
 import com.company.app.ws.repositery.UserAuthorityRepository;
 import com.company.app.ws.repositery.UserRepository;
 import com.company.app.ws.service.UserService;
+import com.company.app.ws.shared.Utils;
 import com.company.app.ws.shared.dto.UserDto;
 
 @Service
@@ -29,6 +30,9 @@ public class UserServiceImplementation implements UserService {
 	
 	@Autowired
 	BCryptPasswordEncoder encoder; 
+	
+	@Autowired
+	Utils utils;
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -47,7 +51,7 @@ public class UserServiceImplementation implements UserService {
 		authorities.setUser(user);
 
 		user.setEncryptedPassword(encoder.encode(userDto.getPassword()));
-		user.setUserId("Test User ID");
+		user.setUserId(utils.generateUserId(25));
 		
 		UserEntity resultEntity = userRepo.save(user);
 		authRepo.save(authorities);
