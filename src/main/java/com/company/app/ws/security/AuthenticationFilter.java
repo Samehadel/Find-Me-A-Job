@@ -2,14 +2,12 @@ package com.company.app.ws.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,14 +19,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.company.app.ws.SpringApplicationContext;
 import com.company.app.ws.service.UserService;
 import com.company.app.ws.shared.dto.UserDto;
-import com.company.app.ws.ui.model.request.LoginRequest;
+import com.company.app.ws.ui.model.request.LoginRequestModel;
+import com.company.app.ws.utils.JwtUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
+	
 	private AuthenticationManager authManager;
 
 	public AuthenticationFilter(AuthenticationManager authManager) {
@@ -40,8 +37,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			HttpServletResponse response) throws AuthenticationException {
 		
 		try {
-			LoginRequest creds = new ObjectMapper()
-											.readValue(request.getInputStream(), LoginRequest.class);
+			LoginRequestModel creds = new ObjectMapper()
+											.readValue(request.getInputStream(), LoginRequestModel.class);
 			
 			
 			return authManager.authenticate(
@@ -51,9 +48,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
                             new ArrayList<>()));
                     
 		}catch(BadCredentialsException ex) {
-			System.err.println("Bad Credintials");
+			
+			// Respond status Unauthorized
+			response.setStatus(401);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+			// Internal server error
+			response.setStatus(500);
 		}
 		
 		return null;
@@ -64,20 +67,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        
+    	JwtUtils jwtUtils = new JwtUtils();
+ 
         String userName = ((User) auth.getPrincipal()).getUsername();  
         
-        String token = Jwts.builder()
-                .setSubject(userName)
-                .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
-                .compact();
+        String token = jwtUtils.getJWT(userName);
+        
         UserService userService = (UserService)SpringApplicationContext.getBean("userServiceImplementation");
-        UserDto userDto = userService.getUser(userName);
+        UserDto userDto = userService.retrieveUser(userName);
         
      
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-        res.addHeader("UserID", String.valueOf(userDto.getId()));
+        res.addHeader("virtualUserId", userDto.getVirtualUserId());
 
     }  
     

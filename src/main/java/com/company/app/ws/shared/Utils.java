@@ -38,7 +38,7 @@ public class Utils {
         return new String(returnValue);
     }
 
-	public static boolean hasTokenExpired(String token) {
+	public static boolean hasTokenExpired(String token) { // True if Expired
 		boolean returnValue = false;
 
 		try {

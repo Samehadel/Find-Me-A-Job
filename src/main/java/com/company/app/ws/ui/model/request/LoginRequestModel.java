@@ -1,6 +1,6 @@
 package com.company.app.ws.ui.model.request;
 
-public class LoginRequest {
+public class LoginRequestModel {
 
 	private String userName;
 	private String password;

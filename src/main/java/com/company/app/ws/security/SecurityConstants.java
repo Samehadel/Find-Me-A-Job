@@ -8,16 +8,11 @@ public class SecurityConstants {
 	//public static final String PASSWORD_RESET_URL = "/users/password-reset";
 	//public static final String H2_CONSOLE = "/h2-console/**";
 	
-	public static final long EXPIRATION_TIME = 60000; 
+	public static final long EXPIRATION_TIME = 1800000; 
 	public static final String TOKEN_PREFIX = "Bearer ";
 	public static final String HEADER_STRING = "Authorization";
-	public static final String SIGN_UP_URL = "/sign-up";
+	public static final String SIGN_UP_URL = "/users/signup";
 	public static final String TOKEN_SECRET = "dfods2sfr2jji" ;
 	
 
-	/*
-	public static String getTokenSecret() {
-		AppProperties appProperties = (AppProperties) SpringApplicationContext.getBean("AppProperties");
-		return appProperties.getTokenSecret();
-	}*/
 }

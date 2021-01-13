@@ -6,8 +6,8 @@ import com.company.app.ws.shared.dto.UserDto;
 
 public interface UserService extends UserDetailsService {
 
-	public UserDto createUser(UserDto userDto);
+	public UserDto createUser(UserDto userDto) throws Exception;
 	
-	public UserDto getUser(String userName);
+	public UserDto retrieveUser(String userName);
 	
 }
