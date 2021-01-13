@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.app.ws.ui.model.request.ProfileDetailsRequestModel;
-import com.company.app.ws.ui.model.response.ProfileResponseModel;
+import com.company.app.ws.ui.models.request.ProfileDetailsRequestModel;
+import com.company.app.ws.ui.models.response.ProfileResponseModel;
 
 @RestController
 @RequestMapping("/profiles")

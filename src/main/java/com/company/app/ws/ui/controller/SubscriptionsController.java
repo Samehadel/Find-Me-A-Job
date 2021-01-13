@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.app.ws.ui.model.request.SubscriptionRequestModel;
+import com.company.app.ws.ui.models.request.SubscriptionRequestModel;
 
 @RestController
 @RequestMapping("/subscriptions")
-public class SubscriptionController {
+public class SubscriptionsController {
 
 	@PostMapping("/subscribe")
 	public void subscribe(@RequestBody SubscriptionRequestModel subscriptionbody) {

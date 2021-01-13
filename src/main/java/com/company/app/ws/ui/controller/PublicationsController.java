@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.app.ws.ui.model.request.PublicationRequestModel;
-import com.company.app.ws.ui.model.response.PublicationResponseModel;
+import com.company.app.ws.ui.models.request.PublicationRequestModel;
+import com.company.app.ws.ui.models.response.PublicationResponseModel;
 
 @RestController
 @RequestMapping("/publications")
-public class PublicationController {
+public class PublicationsController {
 
 	@GetMapping("/{userId}")
 	public List<PublicationResponseModel> accessInboxPublications(@PathVariable long userId){

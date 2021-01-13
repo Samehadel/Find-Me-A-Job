@@ -1,4 +1,4 @@
-package com.company.app.ws.ui.model.response;
+package com.company.app.ws.ui.models.response;
 
 public class UserResponseModel {
 

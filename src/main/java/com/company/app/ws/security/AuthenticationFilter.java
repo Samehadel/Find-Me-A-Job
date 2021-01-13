@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.company.app.ws.SpringApplicationContext;
 import com.company.app.ws.service.UserService;
 import com.company.app.ws.shared.dto.UserDto;
-import com.company.app.ws.ui.model.request.LoginRequestModel;
+import com.company.app.ws.ui.models.request.LoginRequestModel;
 import com.company.app.ws.utils.JwtUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

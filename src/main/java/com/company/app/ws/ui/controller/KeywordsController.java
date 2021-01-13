@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.app.ws.ui.model.response.KeywordResponseModel;
+import com.company.app.ws.ui.models.response.KeywordResponseModel;
 
 @RestController
 @RequestMapping("/keywords")
-public class KeywordController {
+public class KeywordsController {
 
 	@PostMapping("/create")
 	public String createNewKeyword(@RequestBody String decription) {

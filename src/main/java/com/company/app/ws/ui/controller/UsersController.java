@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.company.app.ws.security.SecurityConstants;
 import com.company.app.ws.service.UserService;
 import com.company.app.ws.shared.dto.UserDto;
-import com.company.app.ws.ui.model.request.SignupRequestModel;
-import com.company.app.ws.ui.model.response.UserResponseModel;
+import com.company.app.ws.ui.models.request.SignupRequestModel;
+import com.company.app.ws.ui.models.response.UserResponseModel;
 import com.company.app.ws.utils.JwtUtils;
 
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UsersController {
 
 	@Autowired
 	UserService userService;

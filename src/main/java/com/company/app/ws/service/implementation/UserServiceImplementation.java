@@ -20,7 +20,7 @@ import com.company.app.ws.repositery.UserRepository;
 import com.company.app.ws.service.UserService;
 import com.company.app.ws.shared.Utils;
 import com.company.app.ws.shared.dto.UserDto;
-import com.company.app.ws.ui.model.request.ErrorMessages;
+import com.company.app.ws.ui.models.request.ErrorMessages;
 
 @Service
 public class UserServiceImplementation implements UserService {

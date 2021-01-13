@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.company.app.ws.ui.model.request.ConnectionRequestModel;
+import com.company.app.ws.ui.models.request.ConnectionRequestModel;
 
 @RestController
 @RequestMapping("/connections")
-public class ConnectionController {
+public class ConnectionsController {
 
 	@PostMapping("/request")
 	public ConnectionRequestModel sendConnectionRequest(@RequestBody ConnectionRequestModel connectionRequest) {

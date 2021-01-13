@@ -1,4 +1,4 @@
-package com.company.app.ws.ui.model.request;
+package com.company.app.ws.ui.models.request;
 
 public class SubscriptionRequestModel {
 	
