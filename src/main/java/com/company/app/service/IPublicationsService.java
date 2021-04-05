@@ -8,6 +8,6 @@ import com.company.app.ui.models.response.PublicationResponseModel;
 public interface IPublicationsService {
 
 	public List<PublicationResponseModel> retrievePublications(long userId);
-	public boolean publish(long userId, PublicationDto publicationDto);
+	public void publish(long userId, PublicationDto publicationDto);
 	
 }

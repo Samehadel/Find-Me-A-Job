@@ -1,7 +1,6 @@
 package com.company.app.service.implementation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -49,7 +48,7 @@ public class PublicationServiceImplementation implements IPublicationsService {
 	}
 
 	@Override
-	public boolean publish(long userId, PublicationDto publicationDto) {
+	public void publish(long userId, PublicationDto publicationDto) {
 		
 		//Retrieve user's connections
 		List<ConnectionEntity> userConnections = connectionRepo.findByUserId(userId);
@@ -114,7 +113,6 @@ public class PublicationServiceImplementation implements IPublicationsService {
 			}
 		}
 
-		return false;
 	}
 
 }
