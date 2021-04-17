@@ -20,7 +20,6 @@ import com.company.app.ui.models.request.SignupRequestModel;
 import com.company.app.ui.models.response.UserResponseModel;
 import com.company.app.utils.JwtUtils;
 
-
 @RestController
 @RequestMapping("/users")
 public class UsersController {

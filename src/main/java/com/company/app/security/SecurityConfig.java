@@ -28,13 +28,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
+	private static final String[] AUTH_WHITELIST = {
+
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**",
+            "/signin",
+            SecurityConstants.SIGN_UP_URL
+    };
+	
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.cors().and().csrf().disable()
-			.authorizeRequests(auth -> {
-								auth.antMatchers(SecurityConstants.SIGN_UP_URL).permitAll();
-								auth.antMatchers("/signin").permitAll();}).
-			authorizeRequests().anyRequest().authenticated()
+			.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
+			.and().authorizeRequests().anyRequest().authenticated()
 			.and()
 			.addFilter(new AuthenticationFilter(authenticationManager()))
 			.addFilter(new AuthorizationFilter(authenticationManager()));
