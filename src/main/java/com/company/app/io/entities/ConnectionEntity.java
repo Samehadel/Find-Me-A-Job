@@ -32,7 +32,8 @@ public class ConnectionEntity {
 	@JoinColumn(name = "second_user_id")
 	private UserEntity secondUser;
 
-	// Default Constructor
+	// Constructors
+
 	public ConnectionEntity() {}
 
 	

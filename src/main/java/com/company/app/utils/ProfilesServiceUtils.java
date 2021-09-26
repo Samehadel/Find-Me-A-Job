@@ -27,30 +27,33 @@ public class ProfilesServiceUtils {
 	
 	@Autowired
 	ConnectionRepository connectionRepo; 
-	
+
+	/*
+		This method
+	 */
 	public Set<UserEntity> retrieveUsersBySubscriptions(List<SubscriptionEntity> subscriptions, long userId){
 		
-		//Extract similar subscription
-		List<SubscriptionEntity> similarSubscriptions = retrieveSimilarSubscription(subscriptions, userId);
+		// Step1: Extract similar subscriptions
+		List<SubscriptionEntity> similarSubscriptions = retrieveSimilarSubscriptions(subscriptions, userId);
 		
-		//Store final users for return
+		// Store final users for return
 		Set<UserEntity> users = new HashSet<>();
 
-		//Extract users from similar subscriptions
+		// Step2: Extract users from similar subscriptions
 		for(SubscriptionEntity sub: similarSubscriptions) { 
 			users.add(sub.getUser());
 		}
 	
-		//Exclude users in connection list of the user
+		// Step3: Exclude users in connection list of the user
 		users = excludeConnectedProfiles(users, userId);
 		
-		//Exclude users in requested list of the user
+		// Step4: Exclude users in requested list of the user
 		users = excludeRequestedProfiles(users, userId);
 		
 		return users;
 	}
 	
-	private List<SubscriptionEntity> retrieveSimilarSubscription(List<SubscriptionEntity> subscriptions, long userId){
+	private List<SubscriptionEntity> retrieveSimilarSubscriptions(List<SubscriptionEntity> subscriptions, long userId){
 		List<Integer> keywords = new ArrayList<>();
 		
 		for(SubscriptionEntity sub: subscriptions) 

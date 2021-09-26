@@ -3,9 +3,14 @@ package com.company.app.ui.models.request;
 public class ConnectionRequestModel {
 
 	private long senderId;
-	private long recieverId;
+	private long receiverId;
 	
 	ConnectionRequestModel(){}
+
+	public ConnectionRequestModel(long senderId, long receiverId) {
+		this.senderId = senderId;
+		this.receiverId = receiverId;
+	}
 
 	public long getSenderId() {
 		return senderId;
@@ -15,12 +20,12 @@ public class ConnectionRequestModel {
 		this.senderId = senderId;
 	}
 
-	public long getRecieverId() {
-		return recieverId;
+	public long getReceiverId() {
+		return receiverId;
 	}
 
-	public void setRecieverId(long recieverId) {
-		this.recieverId = recieverId;
+	public void setReceiverId(long receiverId) {
+		this.receiverId = receiverId;
 	}
 
 }

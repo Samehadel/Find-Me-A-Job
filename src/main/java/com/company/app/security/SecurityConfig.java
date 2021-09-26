@@ -1,7 +1,6 @@
 package com.company.app.security;
 
-import javax.sql.DataSource;
-
+import com.company.app.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.company.app.service.IUserService;
+import javax.sql.DataSource;
 
 
 @Configuration

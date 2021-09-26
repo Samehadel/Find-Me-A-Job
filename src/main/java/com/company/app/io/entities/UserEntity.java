@@ -3,6 +3,7 @@ package com.company.app.io.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -64,20 +65,20 @@ public class UserEntity implements Serializable {
 	private List<RequestEntity> sentRequests;
 
 	@OneToMany(mappedBy = "reciever", cascade = CascadeType.ALL) // 5- with 'requests'
-	private List<RequestEntity> recievedRequests;
+	private List<RequestEntity> receivedRequests;
 
 	@OneToMany(mappedBy = "firstUser", cascade = CascadeType.ALL) // 6- with 'connections'
 	private List<ConnectionEntity> sentConnections;
 
 	@OneToMany(mappedBy = "secondUser", cascade = CascadeType.ALL) // 7- with 'connections'
-	private List<ConnectionEntity> recievedConnections;
+	private List<ConnectionEntity> receivedConnections;
 
 	
 	@OneToMany(mappedBy = "sender", cascade = CascadeType.ALL) // 8- with 'publications'
 	private List<PublicationEntity> sentPublications;
 
 	@OneToMany(mappedBy = "reciever", cascade = CascadeType.ALL) // 9- with 'publications'
-	private List<PublicationEntity> recievedPublications;
+	private List<PublicationEntity> receivedPublications;
 	
 	
 	// Default Constructor
@@ -174,12 +175,12 @@ public class UserEntity implements Serializable {
 		this.sentRequests = sentRequests;
 	}
 
-	public List<RequestEntity> getRecievedRequests() {
-		return recievedRequests;
+	public List<RequestEntity> getReceivedRequests() {
+		return receivedRequests;
 	}
 
-	public void setRecievedRequests(List<RequestEntity> recievedRequests) {
-		this.recievedRequests = recievedRequests;
+	public void setReceivedRequests(List<RequestEntity> receivedRequests) {
+		this.receivedRequests = receivedRequests;
 	}
 
 	public List<ConnectionEntity> getSentConnections() {
@@ -190,12 +191,12 @@ public class UserEntity implements Serializable {
 		this.sentConnections = sentConnections;
 	}
 
-	public List<ConnectionEntity> getRecievedConnections() {
-		return recievedConnections;
+	public List<ConnectionEntity> getReceivedConnections() {
+		return receivedConnections;
 	}
 
-	public void setRecievedConnections(List<ConnectionEntity> recievedConnections) {
-		this.recievedConnections = recievedConnections;
+	public void setReceivedConnections(List<ConnectionEntity> receivedConnections) {
+		this.receivedConnections = receivedConnections;
 	}
 
 	public List<PublicationEntity> getSentPublications() {
@@ -206,12 +207,12 @@ public class UserEntity implements Serializable {
 		this.sentPublications = sentPublications;
 	}
 
-	public List<PublicationEntity> getRecievedPublications() {
-		return recievedPublications;
+	public List<PublicationEntity> getReceivedPublications() {
+		return receivedPublications;
 	}
 
-	public void setRecievedPublications(List<PublicationEntity> recievedPublications) {
-		this.recievedPublications = recievedPublications;
+	public void setReceivedPublications(List<PublicationEntity> receivedPublications) {
+		this.receivedPublications = receivedPublications;
 	}
 	
 	
@@ -234,10 +235,10 @@ public class UserEntity implements Serializable {
 
 	// Add recieved request to the user
 	public void addRecievedRequest(RequestEntity request) {
-		if (recievedRequests == null)
-			recievedRequests = new ArrayList<>();
+		if (receivedRequests == null)
+			receivedRequests = new ArrayList<>();
 
-		recievedRequests.add(request);
+		receivedRequests.add(request);
 	}
 
 	// Add sent connection to the user
@@ -248,12 +249,12 @@ public class UserEntity implements Serializable {
 		sentConnections.add(connection);
 	}
 
-	// Add recieved connection to the user
-	public void addRecievedConnection(ConnectionEntity connection) {
-		if (recievedConnections == null)
-			recievedConnections = new ArrayList<>();
+	// Add received connection to the user
+	public void addReceivedConnection(ConnectionEntity connection) {
+		if (receivedConnections == null)
+			receivedConnections = new ArrayList<>();
 
-		recievedConnections.add(connection);
+		receivedConnections.add(connection);
 	}
 
 	// Add sent connection to the user
@@ -264,11 +265,26 @@ public class UserEntity implements Serializable {
 		sentPublications.add(publication);
 	}
 
-	// Add recieved connection to the user
+	// Add received connection to the user
 	public void addRecievedPublication(PublicationEntity publication) {
-		if (recievedPublications == null)
-			recievedPublications = new ArrayList<>();
+		if (receivedPublications == null)
+			receivedPublications = new ArrayList<>();
 
-		recievedPublications.add(publication);
+		receivedPublications.add(publication);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		UserEntity that = (UserEntity) o;
+
+		return  id == that.id &&
+				userName.equals(that.userName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, userName);
 	}
 }

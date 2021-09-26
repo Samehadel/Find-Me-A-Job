@@ -21,7 +21,14 @@ public class ProfilesController {
 	@Autowired
 	IProfilesService profilesService; 
 	
-	
+
+	/**
+
+			* This endpoint is used to show similar profiles for a specific user.
+			* @param userId is the id of the target user to find similar profiles.
+			* @return A list of similar profiles returned using a response model called ProfileResponseModel
+	 */
+
 	@GetMapping("by/{userId}")
 	public List<ProfileResponseModel> displayProfiles(@PathVariable long userId){
 		

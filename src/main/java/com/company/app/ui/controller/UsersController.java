@@ -35,7 +35,8 @@ public class UsersController {
 	
 	
 	@PostMapping("/signup")
-	public UserResponseModel createUser(@RequestBody SignupRequestModel userDetails, HttpServletResponse res) throws Exception {
+	public UserResponseModel createUser(@RequestBody SignupRequestModel userDetails,
+										HttpServletResponse res) throws Exception {
 		
 		// Initialize required objects
 		UserResponseModel returnObj = new UserResponseModel();

@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class MobileAppWsApplication {
+public class FindMeAJobApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MobileAppWsApplication.class, args);
+		SpringApplication.run(FindMeAJobApplication.class, args);
 	}
 
 	@Bean 

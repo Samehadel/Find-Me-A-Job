@@ -9,12 +9,12 @@ import com.company.app.io.entities.RequestEntity;
 import com.company.app.io.entities.UserEntity;
 import com.company.app.repositery.ConnectionRepository;
 import com.company.app.repositery.RequestRepository;
-import com.company.app.service.IRequestService;
+import com.company.app.service.IConnectionRequestService;
 import com.company.app.service.IUserService;
 import com.company.app.shared.dto.RequestDto;
 
 @Service
-public class RequestServiceImplementation implements IRequestService {
+public class ConnectionRequestServiceImplementation implements IConnectionRequestService {
 
 	@Autowired
 	IUserService userService; 

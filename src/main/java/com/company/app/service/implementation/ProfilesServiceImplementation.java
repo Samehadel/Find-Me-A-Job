@@ -16,7 +16,7 @@ import com.company.app.ui.models.response.ProfileResponseModel;
 import com.company.app.utils.ProfilesServiceUtils;
 
 @Service
-public class ProfilesServiceImplemntation implements IProfilesService{
+public class ProfilesServiceImplementation implements IProfilesService{
 
 	@Autowired
 	ISubscriptionService subscriptionsService; 
@@ -28,13 +28,12 @@ public class ProfilesServiceImplemntation implements IProfilesService{
 	ProfilesServiceUtils profilesServiceUtils;
 	
 	@Override
-	public List<ProfileResponseModel> retrieveSimilarUsers(long id) {
+	public List<ProfileResponseModel> retrieveSimilarUsers(long userId) {
 		
-		//Final users for return
+		// Final users for return
 		List<ProfileResponseModel> userModels = new ArrayList<>();
-		
-		//Retrieve user's subscriptions
-		UserEntity user = userService.retrieveUser(id);
+
+		UserEntity user = userService.retrieveUser(userId);
 		
 		Set<UserEntity> similarUsers = profilesServiceUtils.retrieveUsersBySubscriptions(user.getSubscriptions(), user.getId());
 		

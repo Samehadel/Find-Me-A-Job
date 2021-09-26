@@ -6,5 +6,5 @@ import com.company.app.ui.models.response.ProfileResponseModel;
 
 public interface IProfilesService {
 
-	public List<ProfileResponseModel> retrieveSimilarUsers(long id);
+	public List<ProfileResponseModel> retrieveSimilarUsers(long userId);
 }

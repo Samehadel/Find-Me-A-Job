@@ -1,10 +1,10 @@
 package com.company.app.ui.models.response;
 
-public class ConnectionResposeModel {
+public class ConnectionResponseModel {
 
 	private long id;
 	private long senderId;
-	private long recieverId;
+	private long receiverId;
 	
 	public long getId() {
 		return id;
@@ -18,11 +18,11 @@ public class ConnectionResposeModel {
 	public void setSenderId(long senderId) {
 		this.senderId = senderId;
 	}
-	public long getRecieverId() {
-		return recieverId;
+	public long getReceiverId() {
+		return receiverId;
 	}
-	public void setRecieverId(long recieverId) {
-		this.recieverId = recieverId;
+	public void setReceiverId(long receiverId) {
+		this.receiverId = receiverId;
 	}
 	
 }

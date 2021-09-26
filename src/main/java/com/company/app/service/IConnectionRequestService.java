@@ -2,7 +2,7 @@ package com.company.app.service;
 
 import com.company.app.shared.dto.RequestDto;
 
-public interface IRequestService {
+public interface IConnectionRequestService {
 	
 	public RequestDto createConnectionRequest(RequestDto requestDto);
 	
