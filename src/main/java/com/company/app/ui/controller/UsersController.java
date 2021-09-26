@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +36,7 @@ public class UsersController {
 	
 	
 	@PostMapping("/signup")
-	public UserResponseModel createUser(@RequestBody SignupRequestModel userDetails,
-										HttpServletResponse res) throws Exception {
+	public ResponseEntity<UserResponseModel> createUser(@RequestBody SignupRequestModel userDetails) throws Exception {
 		
 		// Initialize required objects
 		UserResponseModel returnObj = new UserResponseModel();
@@ -49,15 +49,13 @@ public class UsersController {
 		UserDto createdUserEntity = userService.createUser(userDto);
 
 		BeanUtils.copyProperties(createdUserEntity, returnObj);
-		
-		// Add JWT and virtualUserId
-		 res.addHeader(SecurityConstants.HEADER_STRING,
-				 		SecurityConstants.TOKEN_PREFIX + 
-				 			jwtUtils.getJWT(userDetails.getUserName(), userDetails.getPassword()));
-		 
-	     res.addHeader("virtualUserId", createdUserEntity.getVirtualUserId());
-	        
-		return returnObj;
+
+		// Add JWT and virtualUserId then return response entity
+		return ResponseEntity.ok()
+				.header(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX +
+						jwtUtils.getJWT(userDetails.getUserName(), userDetails.getPassword()))
+				.header("virtualUserId", createdUserEntity.getVirtualUserId())
+				.build();
 	}
 	
 	@PutMapping("/pin/{userId}")

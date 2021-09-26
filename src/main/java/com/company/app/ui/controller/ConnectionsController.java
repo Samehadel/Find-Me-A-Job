@@ -7,6 +7,7 @@ import com.company.app.ui.models.response.ConnectionResponseModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +25,7 @@ public class ConnectionsController {
 	 * @return a connection response model that holds the request information e.g. id
 	 */
 	@PostMapping("/request")
-	public ConnectionResponseModel sendConnectionRequest(@RequestBody ConnectionRequestModel connectionRequest,
-														 HttpServletResponse res) {
+	public ResponseEntity sendConnectionRequest(@RequestBody ConnectionRequestModel connectionRequest) {
 		
 		// Instantiate the response model
 		ConnectionResponseModel responseModel = new ConnectionResponseModel();
@@ -41,11 +41,8 @@ public class ConnectionsController {
 		
 		// Copy properties back to response model
 		BeanUtils.copyProperties(serviceBackDto, responseModel);
-		
-		if(responseModel.getId() == 0)
-			res.setStatus(500);
-		
-		return responseModel;
+
+		return responseModel.getId() == 0 ? ResponseEntity.status(500).build() : ResponseEntity.ok().build();
 	}
 
 	/**

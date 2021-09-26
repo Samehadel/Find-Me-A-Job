@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.models.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,11 +27,10 @@ public class KeywordsController {
 	IKeywordService keywordService;
 	
 	@PostMapping("/create")
-	public void createNewKeyword(@RequestBody String decription, HttpServletResponse res) {
-		boolean check = keywordService.addkeyword(decription);
-		
-		if(!check)
-			res.setStatus(500);
+	public ResponseEntity createNewKeyword(@RequestBody String description) {
+		boolean check = keywordService.addkeyword(description);
+
+		return check ? ResponseEntity.ok().build() : ResponseEntity.status(500).build();
 	}
 	
 	@GetMapping
