@@ -50,7 +50,7 @@ public class UsersController {
 
 		BeanUtils.copyProperties(createdUserEntity, returnObj);
 
-		// Add JWT and virtualUserId then return response entity
+		// Add JWT and virtualUserId then return the response entity
 		return ResponseEntity.ok()
 				.header(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX +
 						jwtUtils.getJWT(userDetails.getUserName(), userDetails.getPassword()))

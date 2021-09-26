@@ -2,11 +2,13 @@ package com.company.app.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,28 +35,36 @@ public class SubscriptionsController {
 	public ResponseEntity subscribe(@RequestBody SubscriptionRequestModel subscriptionBody) {
 		boolean check = subscriptionService.createSubscription(subscriptionBody.getUserId(), subscriptionBody.getKeywordId());
 
-		return check ? ResponseEntity.ok().build() : ResponseEntity.status(500).build();
+		return 	check ? ResponseEntity.status(HttpStatus.OK).build() :
+				ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	
 	}
 	
 	@GetMapping("/{userId}")
-	public List<SubscriptionResponseModel> accessSubscriptions(@PathVariable long userId){
+	public ResponseEntity accessSubscriptions(@PathVariable long userId){
 		List<SubscriptionResponseModel> subscriptions = new ArrayList<>();
 		List<SubscriptionDto> subscriptionsDto = subscriptionService.getSubscriptions(userId);
 		
 		for(SubscriptionDto dto: subscriptionsDto) {
 			SubscriptionResponseModel responseModel = new SubscriptionResponseModel();
 			
-			//Copy values from DTO to response model
+			// Copy values from DTO to response model
 			BeanUtils.copyProperties(dto, responseModel);
 			
 			subscriptions.add(responseModel);
 		}
-		return subscriptions;
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(subscriptions);
 	}
 	
 	@DeleteMapping("/drop/{subscriptionId}")
-	public void removeSubscribedKeywords(@PathVariable long subscriptionId) {
+	public ResponseEntity removeSubscribedKeywords(@PathVariable long subscriptionId) {
 		subscriptionService.dropSubscription(subscriptionId);
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.build();
 	}
 }

@@ -3,6 +3,8 @@ package com.company.app.ui.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,13 +32,14 @@ public class ProfilesController {
 	 */
 
 	@GetMapping("by/{userId}")
-	public List<ProfileResponseModel> displayProfiles(@PathVariable long userId){
-		
-		//Use of the service
+	public ResponseEntity displayProfiles(@PathVariable long userId){
+
+		// Use of the service
 		List<ProfileResponseModel> users = profilesService.retrieveSimilarUsers(userId);
-		
-		
-		return users;
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(users);
 	}
 	
 	@PutMapping("/details/{userId}")

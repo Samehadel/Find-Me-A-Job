@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import io.swagger.models.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,26 +31,29 @@ public class KeywordsController {
 	public ResponseEntity createNewKeyword(@RequestBody String description) {
 		boolean check = keywordService.addkeyword(description);
 
-		return check ? ResponseEntity.ok().build() : ResponseEntity.status(500).build();
+		return check ? ResponseEntity.status(HttpStatus.OK).build() :
+				ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 	
 	@GetMapping
-	public List<KeywordResponseModel> retrieveAllKeywords(){
+	public ResponseEntity retrieveAllKeywords(){
 		
 		KeywordResponseModel keywordResponse = new KeywordResponseModel();
-		List<KeywordResponseModel> returnKeywords = new ArrayList<KeywordResponseModel>();
+		List<KeywordResponseModel> returnKeywords = new ArrayList<>();
 		
-		//Call the service
+		// Call the service
 		List<KeywordDto> keywordsDto = keywordService.getKeywords();
 		
-		//Convert DTOs to Response model
+		// Convert DTOs to Response model
 		for(KeywordDto dto: keywordsDto) {
 			BeanUtils.copyProperties(dto, keywordResponse);
 			returnKeywords.add(keywordResponse);
 			
 			keywordResponse = new KeywordResponseModel();
 		}
-		
-		return returnKeywords;
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(returnKeywords);
 	}
 }

@@ -47,7 +47,7 @@ public class UserServiceImplementation implements IUserService {
 		if(userRepo.findByUserName(userDto.getUserName()) != null) 
 			throw new Exception(ErrorMessages.USER_ALREADY_EXIST.getErrorMessage());
 		
-		// Prepare Requeired objects
+		// Prepare Required objects
 		UserDto returnDto = new UserDto();
 		
 		UserEntity user = new UserEntity();

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,20 +27,26 @@ public class PublicationsController {
 	
 	
 	@PostMapping("/publish/{userId}")
-	public void publishJobPost(@RequestBody PublicationRequestModel publication, @PathVariable long userId){
+	public ResponseEntity publishJobPost(@RequestBody PublicationRequestModel publication, @PathVariable long userId){
 		PublicationDto dto = new PublicationDto();
 		
 		BeanUtils.copyProperties(publication, dto);
 		
 		publicationService.publish(userId, dto);
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.build();
 	}
 	
 	@GetMapping("/{userId}")
-	public List<PublicationResponseModel> accessInboxPublications(@PathVariable long userId){
+	public ResponseEntity accessInboxPublications(@PathVariable long userId){
 		//Use of service
 		List<PublicationResponseModel> publications = publicationService.retrievePublications(userId);
-		
-		return publications;
+
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(publications);
 	}
 	
 }

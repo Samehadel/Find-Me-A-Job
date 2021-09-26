@@ -42,7 +42,8 @@ public class ConnectionsController {
 		// Copy properties back to response model
 		BeanUtils.copyProperties(serviceBackDto, responseModel);
 
-		return responseModel.getId() == 0 ? ResponseEntity.status(500).build() : ResponseEntity.ok().build();
+		return responseModel.getId() == 0 ? ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build() :
+				ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	/**
@@ -50,12 +51,12 @@ public class ConnectionsController {
 	 * @param requestId is the connection request id
 	 */
 	@PutMapping("/requests/accept/{requestId}")
-	public void acceptConnectionRequest(@PathVariable long requestId, HttpServletResponse res) {
+	public ResponseEntity acceptConnectionRequest(@PathVariable long requestId) {
 		
 		boolean check = requestService.acceptConnectionRequest(requestId);
-		
-		if(!check) res.setStatus(500);
-		
+
+		return check ? ResponseEntity.status(HttpStatus.OK).build() :
+				ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
 	/**
@@ -63,9 +64,11 @@ public class ConnectionsController {
 	 * @param requestId is the connection request id
 	 */
 	@DeleteMapping("/requests/reject/{requestId}")
-	public void rejectConnectionRequest(@PathVariable long requestId, HttpServletResponse res) {
+	public ResponseEntity rejectConnectionRequest(@PathVariable long requestId) {
 		requestService.rejectConnectionRequest(requestId);
 
-		res.setStatus(HttpStatus.OK.value());
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.build();
 	}
 }
