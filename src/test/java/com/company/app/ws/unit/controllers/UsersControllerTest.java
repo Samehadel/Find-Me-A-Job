@@ -53,9 +53,5 @@ public class UsersControllerTest {
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         Assert.assertNotNull(responseEntity.getHeaders().get(SecurityConstants.HEADER_STRING));
         Assert.assertNotNull(responseEntity.getHeaders().get("virtualUserId"));
-
-
     }
 }
-
-//Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYWlsMThAb3V0bG9vay5jb20iLCJleHAiOjE2MzI2NTg2NjZ9.8JLcSCGLpwSCgrxMFzVfNbPI-l5qx_NEs-hzNZytbsDre-3dWywFfesiFufW3zi5iC1o6lK5C_s6871RUUYgdQ

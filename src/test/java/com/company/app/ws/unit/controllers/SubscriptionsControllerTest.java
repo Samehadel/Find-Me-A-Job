@@ -71,7 +71,6 @@ public class SubscriptionsControllerTest {
 
     @Test
     public void removeSubscribedKeywords_happy_path(){
-
         ResponseEntity responseEntity = subscriptionsController.accessSubscriptions(1l);
 
         // Assertion Stage
