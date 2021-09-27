@@ -70,12 +70,12 @@ public class UserServiceImplementation implements IUserService {
 		user.setVirtualUserId(utils.generateUserId(10));
 		
 		// Use Repository To Save The User And Its Role 
-		UserEntity resultEntity = userRepo.save(user);
+		userRepo.save(user);
 		authRepo.save(authorities);
 		detailsRepo.save(userDetails);
 		
 		// Copy Values From Result Entity to The Return Object
-		BeanUtils.copyProperties(resultEntity, returnDto);
+		BeanUtils.copyProperties(user, returnDto);
 		
 		return returnDto;
 	}
@@ -83,11 +83,11 @@ public class UserServiceImplementation implements IUserService {
 	@Override
 	public UserDto retrieveUser(String userName) {
 		UserEntity userEntity = userRepo.findByUserName(userName);
+		UserDto returnValue = new UserDto();
 
 		if (userEntity == null)
 			throw new UsernameNotFoundException(userName);
 
-		UserDto returnValue = new UserDto();
 		BeanUtils.copyProperties(userEntity, returnValue);
  
 		return returnValue;
@@ -95,9 +95,13 @@ public class UserServiceImplementation implements IUserService {
 	
 	
 	@Override
-	public UserEntity retrieveUser(long id) {
-		
-		return userRepo.findById(id);
+	public UserEntity retrieveUser(long id) throws Exception {
+		UserEntity userEntity = userRepo.findById(id);
+
+		if (userEntity == null)
+			throw new Exception(ErrorMessages.USER_NOT_FOUND.getErrorMessage());
+
+		return userEntity;
 	}
 
 	

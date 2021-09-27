@@ -6,5 +6,5 @@ import com.company.app.ui.models.response.ProfileResponseModel;
 
 public interface IProfilesService {
 
-	public List<ProfileResponseModel> retrieveSimilarUsers(long userId);
+	public List<ProfileResponseModel> retrieveSimilarUsers(long userId) throws Exception;
 }

@@ -4,7 +4,7 @@ import com.company.app.shared.dto.RequestDto;
 
 public interface IConnectionRequestService {
 	
-	public RequestDto createConnectionRequest(RequestDto requestDto);
+	public RequestDto createConnectionRequest(RequestDto requestDto) throws Exception;
 	
 	public boolean acceptConnectionRequest(long id);
 	

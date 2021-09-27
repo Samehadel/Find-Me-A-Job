@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
 @RequestMapping("/connections")
 public class ConnectionsController {
@@ -25,7 +23,7 @@ public class ConnectionsController {
 	 * @return a connection response model that holds the request information e.g. id
 	 */
 	@PostMapping("/request")
-	public ResponseEntity sendConnectionRequest(@RequestBody ConnectionRequestModel connectionRequest) {
+	public ResponseEntity sendConnectionRequest(@RequestBody ConnectionRequestModel connectionRequest) throws Exception {
 		
 		// Instantiate the response model
 		ConnectionResponseModel responseModel = new ConnectionResponseModel();

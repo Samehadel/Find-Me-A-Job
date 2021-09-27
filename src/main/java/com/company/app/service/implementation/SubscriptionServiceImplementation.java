@@ -29,7 +29,7 @@ public class SubscriptionServiceImplementation implements ISubscriptionService {
 	
 	
 	@Override
-	public boolean createSubscription(long userId, int keywordId) {
+	public boolean createSubscription(long userId, int keywordId) throws Exception {
 
 		//Retrieve user
 		UserEntity user = userService.retrieveUser(userId);

@@ -1,20 +1,14 @@
 package com.company.app.ui.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.company.app.service.IProfilesService;
 import com.company.app.ui.models.request.ProfileDetailsRequestModel;
 import com.company.app.ui.models.response.ProfileResponseModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/profiles")
@@ -32,7 +26,7 @@ public class ProfilesController {
 	 */
 
 	@GetMapping("by/{userId}")
-	public ResponseEntity displayProfiles(@PathVariable long userId){
+	public ResponseEntity displayProfiles(@PathVariable long userId) throws Exception {
 
 		// Use of the service
 		List<ProfileResponseModel> users = profilesService.retrieveSimilarUsers(userId);

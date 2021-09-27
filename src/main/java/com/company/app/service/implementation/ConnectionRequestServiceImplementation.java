@@ -26,20 +26,20 @@ public class ConnectionRequestServiceImplementation implements IConnectionReques
 	ConnectionRepository connectionRepo;
 	
 	@Override
-	public RequestDto createConnectionRequest(RequestDto requestDto) {
+	public RequestDto createConnectionRequest(RequestDto requestDto) throws Exception {
 		
 		RequestEntity newRequest = new RequestEntity();
 		
 		//Retrieve the two users from database
 		UserEntity sender = userService.retrieveUser(requestDto.getSenderId());
-		UserEntity reciever = userService.retrieveUser(requestDto.getRecieverId());
+		UserEntity receiver = userService.retrieveUser(requestDto.getRecieverId());
 		
 		//Assign relationships
 		sender.addSentRequest(newRequest);
-		reciever.addRecievedRequest(newRequest);
+		receiver.addRecievedRequest(newRequest);
 		
 		newRequest.setSender(sender);
-		newRequest.setReciever(reciever);
+		newRequest.setReciever(receiver);
 		
 		//Save the request
 		RequestEntity backRequest = requestRepo.save(newRequest);

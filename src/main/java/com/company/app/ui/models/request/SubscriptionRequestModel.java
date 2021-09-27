@@ -7,6 +7,11 @@ public class SubscriptionRequestModel {
 	
 	public SubscriptionRequestModel() {}
 
+	public SubscriptionRequestModel(long userId, int keywordId) {
+		this.userId = userId;
+		this.keywordId = keywordId;
+	}
+
 	public long getUserId() {
 		return userId;
 	}

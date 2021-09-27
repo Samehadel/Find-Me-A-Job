@@ -8,7 +8,7 @@ public class PublicationRequestModel {
 	private String link;
 	private List<Integer> keywords;
 	
-	PublicationRequestModel(){}
+	public PublicationRequestModel(){}
 
 	public String getContent() {
 		return content;

@@ -28,7 +28,7 @@ public class ProfilesServiceImplementation implements IProfilesService{
 	ProfilesServiceUtils profilesServiceUtils;
 	
 	@Override
-	public List<ProfileResponseModel> retrieveSimilarUsers(long userId) {
+	public List<ProfileResponseModel> retrieveSimilarUsers(long userId) throws Exception {
 		
 		// Final users for return
 		List<ProfileResponseModel> userModels = new ArrayList<>();

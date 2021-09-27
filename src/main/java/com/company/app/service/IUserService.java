@@ -11,7 +11,7 @@ public interface IUserService extends UserDetailsService {
 	
 	public UserDto retrieveUser(String userName);
 	
-	public UserEntity retrieveUser(long id);
+	public UserEntity retrieveUser(long id) throws Exception;
 	
 	public UserDto updateUser(UserEntity user);
 	

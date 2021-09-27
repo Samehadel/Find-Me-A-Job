@@ -1,5 +1,7 @@
 package com.company.app.shared.dto;
 
+import com.company.app.io.entities.UserAuthorityEntity;
+
 import java.io.Serializable;
 
 public class UserDto implements Serializable{
@@ -11,7 +13,7 @@ public class UserDto implements Serializable{
 	private String userName;
 	private String password;
 	private String encryptedPassword;
-	private String role;
+	private UserAuthorityEntity authority;
 	private String virtualUserId;
 	private boolean emailVerificationStatus = false;
 	
@@ -52,12 +54,15 @@ public class UserDto implements Serializable{
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
 	}
-	public String getRole() {
-		return role;
+
+	public UserAuthorityEntity getAuthority() {
+		return authority;
 	}
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setAuthority(UserAuthorityEntity authority) {
+		this.authority = authority;
 	}
+
 	public String getVirtualUserId() {
 		return virtualUserId;
 	}
