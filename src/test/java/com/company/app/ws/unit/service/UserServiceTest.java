@@ -1,4 +1,4 @@
-package com.company.app.ws.unit.controllers.service;
+package com.company.app.ws.unit.service;
 
 import com.company.app.io.entities.UserEntity;
 import com.company.app.io.entities.UserRole;

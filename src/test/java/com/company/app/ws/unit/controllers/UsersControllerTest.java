@@ -1,4 +1,4 @@
-package com.company.app.ws.unit;
+package com.company.app.ws.unit.controllers;
 
 import com.company.app.security.SecurityConstants;
 import com.company.app.service.IUserService;
@@ -44,9 +44,12 @@ public class UsersControllerTest {
         SignupRequestModel signupRequestModel = new SignupRequestModel("Sameh", "Adel",
                 "email", "pass");
 
+        // Mocking Stage
         when(userService.createUser(any())).thenReturn(new UserDto());
+
         ResponseEntity responseEntity = usersController.createUser(signupRequestModel);
 
+        // Assertion Stage
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         Assert.assertNotNull(responseEntity.getHeaders().get(SecurityConstants.HEADER_STRING));
         Assert.assertNotNull(responseEntity.getHeaders().get("virtualUserId"));
