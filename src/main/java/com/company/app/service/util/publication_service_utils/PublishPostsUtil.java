@@ -12,24 +12,24 @@ import java.util.List;
 
 public abstract class PublishPostsUtil {
 
-    public void publish(PublicationDto publicationDto){
+    public void publish(PublicationDto publicationDto) {
 
-        // Extract user's connections and prepare the required entities
+        // STEP 1: Extract user's connections and prepare the required entities
         prepareEntities(publicationDto);
 
-        /*
-          This step extract the matched connections who already subscribed to the pre-assigned
-          keywords by the sender and prepare the publication entities for the next step
-           to be saved in the database
+        /*  STEP 2: Extract the matched connections who already subscribed to the pre-assigned
+            keywords by the sender and prepare the publication entities for the next step
+            to be saved in the database
         */
-        List<PublicationEntity> publications = buildPublications(publicationDto.getSenderId(),
-                                                                 publicationDto);
+        List<PublicationEntity> publications = buildPublications(publicationDto.getSenderId(), publicationDto);
 
-        // Save the built publications to the database
+        //  STEP 3: Save the built publications to the database
         savePublications(publications);
     }
 
     protected abstract void prepareEntities(PublicationDto publicationDto);
+
     protected abstract List<PublicationEntity> buildPublications(long userId, PublicationDto publicationDto);
+
     protected abstract void savePublications(List<PublicationEntity> publications);
 }
