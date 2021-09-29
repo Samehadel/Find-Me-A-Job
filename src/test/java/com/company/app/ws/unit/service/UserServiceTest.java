@@ -9,7 +9,6 @@ import com.company.app.service.IUserService;
 import com.company.app.service.implementation.UserServiceImplementation;
 import com.company.app.shared.Utils;
 import com.company.app.shared.dto.UserDto;
-import org.h2.engine.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

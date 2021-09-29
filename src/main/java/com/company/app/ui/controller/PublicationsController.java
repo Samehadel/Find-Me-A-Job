@@ -17,16 +17,18 @@ import java.util.List;
 public class PublicationsController {
 
 	@Autowired
-	IPublicationsService publicationService; 
+	IPublicationsService publicationService;
 	
 	
 	@PostMapping("/publish/{userId}")
 	public ResponseEntity publishJobPost(@RequestBody PublicationRequestModel publication, @PathVariable long userId){
-		PublicationDto dto = new PublicationDto();
-		
-		BeanUtils.copyProperties(publication, dto);
-		
-		publicationService.publish(userId, dto);
+		PublicationDto publicationDto = new PublicationDto();
+
+		// Build the publication DTO to be sent for the service layer
+		BeanUtils.copyProperties(publication, publicationDto);
+		publicationDto.setSenderId(userId);
+
+		publicationService.publish(publicationDto);
 
 		return ResponseEntity
 				.status(HttpStatus.OK)

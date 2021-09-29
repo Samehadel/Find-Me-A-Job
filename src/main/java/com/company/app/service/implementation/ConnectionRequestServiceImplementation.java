@@ -32,7 +32,7 @@ public class ConnectionRequestServiceImplementation implements IConnectionReques
 		
 		//Retrieve the two users from database
 		UserEntity sender = userService.retrieveUser(requestDto.getSenderId());
-		UserEntity receiver = userService.retrieveUser(requestDto.getRecieverId());
+		UserEntity receiver = userService.retrieveUser(requestDto.getReceiverId());
 		
 		//Assign relationships
 		sender.addSentRequest(newRequest);
@@ -62,10 +62,10 @@ public class ConnectionRequestServiceImplementation implements IConnectionReques
 		
 		//Get the associated users
 		UserEntity sender = userService.retrieveUser(request.getSender().getId());
-		UserEntity reciever = userService.retrieveUser(request.getReciever().getId());
+		UserEntity receiver = userService.retrieveUser(request.getReciever().getId());
 		
 		connection.setFirstUser(sender);
-		connection.setSecondUser(reciever);
+		connection.setSecondUser(receiver);
 		
 		// Delete the request from the request table
 		requestRepo.delete(request);

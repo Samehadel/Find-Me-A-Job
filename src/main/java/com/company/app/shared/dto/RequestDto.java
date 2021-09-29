@@ -4,7 +4,7 @@ public class RequestDto {
 
 	private long id;
 	private long senderId;
-	private long recieverId;
+	private long receiverId;
 	
 	
 	public long getId() {
@@ -19,11 +19,11 @@ public class RequestDto {
 	public void setSenderId(long senderId) {
 		this.senderId = senderId;
 	}
-	public long getRecieverId() {
-		return recieverId;
+	public long getReceiverId() {
+		return receiverId;
 	}
-	public void setRecieverId(long recieverId) {
-		this.recieverId = recieverId;
+	public void setReceiverId(long receiverId) {
+		this.receiverId = receiverId;
 	}
 	
 }
