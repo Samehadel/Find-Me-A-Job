@@ -13,7 +13,7 @@ import com.company.app.service.IProfilesService;
 import com.company.app.service.ISubscriptionService;
 import com.company.app.service.IUserService;
 import com.company.app.ui.models.response.ProfileResponseModel;
-import com.company.app.utils.ProfilesServiceUtils;
+import com.company.app.service.util.user_service_utils.ProfilesServiceUtils;
 
 @Service
 public class ProfilesServiceImplementation implements IProfilesService{

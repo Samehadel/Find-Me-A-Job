@@ -1,4 +1,4 @@
-package com.company.app.utils;
+package com.company.app.service.util.user_service_utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
