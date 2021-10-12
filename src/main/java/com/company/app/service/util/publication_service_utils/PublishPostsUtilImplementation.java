@@ -50,8 +50,7 @@ public class PublishPostsUtilImplementation extends PublishPostsUtil {
     }
 
     @Override
-    protected List<PublicationEntity> buildPublications(long userId,
-                                                     PublicationDto publicationDto) {
+    protected List<PublicationEntity> buildPublications(PublicationDto publicationDto) {
         List<PublicationEntity> publications = new ArrayList<>();
 
         // Loop over connections
@@ -60,7 +59,7 @@ public class PublishPostsUtilImplementation extends PublishPostsUtil {
 
             // Look for the receiver whether is first or second in each connection
             UserEntity receiver = conn.getFirstUser();
-            if (receiver.getId() == userId)
+            if (receiver.getId() == publicationDto.getSenderId())
                 receiver = conn.getSecondUser();
 
 

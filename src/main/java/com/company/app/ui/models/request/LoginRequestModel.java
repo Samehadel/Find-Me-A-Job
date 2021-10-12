@@ -18,6 +18,4 @@ public class LoginRequestModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }

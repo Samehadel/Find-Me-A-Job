@@ -10,8 +10,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 
 @Configuration
@@ -40,12 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.cors().and().csrf().disable()
-			.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-			.and().authorizeRequests().anyRequest().authenticated()
-			.and()
-			.addFilter(new AuthenticationFilter(authenticationManager()))
-			.addFilter(new AuthorizationFilter(authenticationManager()));
-
+				.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
+				.and().authorizeRequests().anyRequest().authenticated()
+				.and()
+				.addFilter(new AuthenticationFilter(authenticationManager()))
+				.addFilter(new AuthorizationFilter(authenticationManager()));
 	}
 
 	@Override
@@ -64,6 +70,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
-   
+
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+				.allowCredentials(true)
+				.allowedHeaders("X-Requested-With","Origin","Content-Type","Accept")
+				.allowedOrigins("http://localhost:3000")
+				.allowedMethods("GET", "POST", "PUT", "DELETE")
+				.exposedHeaders("Access-Control-Allow-Headers", "Authorization", "virtualUserId",
+						"Access-Control-Allow-Headers",
+						"Origin", "Accept, X-Requested-With",
+						"Content-Type", "Access-Control-Request-Method",
+						"Access-Control-Request-Headers");
+			}
+		};
+	}
 }

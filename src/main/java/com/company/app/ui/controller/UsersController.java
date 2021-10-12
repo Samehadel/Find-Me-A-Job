@@ -8,10 +8,14 @@ import com.company.app.ui.models.response.UserResponseModel;
 import com.company.app.utils.JwtUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger.readers.operation.ResponseHeaders;
 
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -20,15 +24,13 @@ public class UsersController {
 	IUserService userService;
 
 	@Autowired
-	AuthenticationManager authenticationManager;
-
-	@Autowired
 	JwtUtils jwtUtils;
 	
 	
 	@PostMapping("/signup")
-	public ResponseEntity<UserResponseModel> createUser(@RequestBody SignupRequestModel userDetails) throws Exception {
-		
+	public ResponseEntity<UserResponseModel> createUser
+            (@RequestBody SignupRequestModel userDetails) throws Exception {
+
 		// Initialize required objects
 		UserResponseModel returnObj = new UserResponseModel();
 		UserDto userDto = new UserDto();
@@ -41,12 +43,14 @@ public class UsersController {
 
 		BeanUtils.copyProperties(createdUserEntity, returnObj);
 
-		// Add JWT and virtualUserId then return the response entity
-		return ResponseEntity.ok()
-				.header(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX +
-						jwtUtils.getJWT(userDetails.getUserName(), userDetails.getPassword()))
-				.header("virtualUserId", createdUserEntity.getVirtualUserId())
-				.build();
+        // Add JWT and virtualUserId then return the response entity
+		ResponseEntity response = ResponseEntity.status(HttpStatus.OK)
+                .header(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX +
+                        jwtUtils.getJWT(userDetails.getUserName(), userDetails.getPassword()))
+                .header("virtualUserId", createdUserEntity.getVirtualUserId())
+                .body(returnObj);
+
+		return response;
 	}
 	
 	@PutMapping("/pin/{userId}")

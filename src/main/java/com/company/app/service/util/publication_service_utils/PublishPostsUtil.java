@@ -21,7 +21,7 @@ public abstract class PublishPostsUtil {
             keywords by the sender and prepare the publication entities for the next step
             to be saved in the database
         */
-        List<PublicationEntity> publications = buildPublications(publicationDto.getSenderId(), publicationDto);
+        List<PublicationEntity> publications = buildPublications(publicationDto);
 
         //  STEP 3: Save the built publications to the database
         savePublications(publications);
@@ -29,7 +29,7 @@ public abstract class PublishPostsUtil {
 
     protected abstract void prepareEntities(PublicationDto publicationDto);
 
-    protected abstract List<PublicationEntity> buildPublications(long userId, PublicationDto publicationDto);
+    protected abstract List<PublicationEntity> buildPublications(PublicationDto publicationDto);
 
     protected abstract void savePublications(List<PublicationEntity> publications);
 }
